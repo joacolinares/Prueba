@@ -1,0 +1,8 @@
+.buyMembershipClass {
+    background: rgb(91,0,255) !important;
+    background: linear-gradient(0deg, rgb(28, 5, 71) 0%, rgb(185, 111, 255) 100%) !important; 
+    width: 90% !important;
+    margin: 20px !important;
+    color: white !important;
+    font-weight: bolder !important;
+}
