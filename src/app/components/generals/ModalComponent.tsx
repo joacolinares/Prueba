@@ -2,7 +2,7 @@
 import React from 'react'
 import IconCloseSVG from '@/assets/icons/IconClose';
 import Modal from 'react-modal'
-Modal.setAppElement("#root")
+//Modal.setAppElement("#root")
 
 interface Props {
   isOpen: boolean;

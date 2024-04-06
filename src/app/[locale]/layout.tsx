@@ -17,6 +17,7 @@ export default function RootLayout({ children, params: { locale } }: Props) {
   const messages = useMessages();
 
   return (
+    
     <NextIntlClientProvider locale={locale} messages={messages}>
         {children}
     </NextIntlClientProvider>

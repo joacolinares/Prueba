@@ -10,6 +10,9 @@
   },
   "dependencies": {
     "@ducanh2912/next-pwa": "^10.2.5",
+    "@thirdweb-dev/react": "^4.4.29",
+    "@thirdweb-dev/sdk": "^4.0.55",
+    "ethers": "^5.7.2",
     "next": "14.1.4",
     "next-intl": "^3.10.0",
     "react": "^18",
@@ -17,7 +20,8 @@
     "react-modal": "^3.16.1",
     "react-phone-number-input": "^3.3.9",
     "react-spinners": "^0.13.8",
-    "sass": "^1.72.0"
+    "sass": "^1.72.0",
+    "web3": "^4.7.0"
   },
   "devDependencies": {
     "@types/node": "^20",

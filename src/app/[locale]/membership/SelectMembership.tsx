@@ -8,7 +8,11 @@ import CheckIcon from "@/assets/icons/CheckIcon";
 import { useState } from "react";
 import ModalComponent from "@/app/components/generals/ModalComponent";
 import ButtonPrimary from "@/app/components/generals/ButtonPrimary";
-
+import { ThirdwebProvider, Web3Button } from "@thirdweb-dev/react";
+import { ethers } from "ethers";
+import abi from './abis/abi.json'
+import Web3 from 'web3';
+import { BinanceTestnet } from "@thirdweb-dev/chains";
 interface Props {
   dataPlans: PlansMembership[];
 }
@@ -32,7 +36,75 @@ const SelectMembership = ({ dataPlans }: Props) => {
     }
   };
 
+const callContract = async(selectedPlan : any) =>{
+  console.log(selectedPlan.plan)
+  console.log("test")
+  const ethereum = (window as any).ethereum;
+  const accounts = await ethereum.request({
+    method: "eth_requestAccounts",
+  });
+
+  const provider = new ethers.providers.Web3Provider(ethereum)
+  const walletAddress = accounts[0]   
+  const signer = provider.getSigner(walletAddress)
+  const contractAddress = "0x0cda7c31216405d997479f3e0219a5d9f3d9909c"; 
+  const contract = new ethers.Contract(contractAddress, abi, signer);
+  console.log(walletAddress)
+  console.log(contract)
+  const balance = await contract.totalPercentage();
+  console.log(balance)
+  try {
+    //const transaction = await contract.buyMembership(1,"0x0271f837f08395f0d1fb0005d99F9A0B957eb72b");
+  //  await transaction.wait();
+  } catch (error) {
+    console.error("Error al ejecutar la función del contrato:", error);
+  }
+
+}
+
+const callContract2 = async(selectedPlan : any) =>{
+  console.log(selectedPlan.plan)
+  const contractAddress = "0x0cda7c31216405d997479f3e0219a5d9f3d9909c"; 
+  const provider = new ethers.providers.Web3Provider(window.ethereum)
+  console.log("asd",provider)
+  const contract = new ethers.Contract(contractAddress, abi, provider);
+  const totalPercentage2 =  contract
+  console.log(totalPercentage2)
+ const totalPercentage = await contract.totalPercentage()
+ console.log(totalPercentage)
+}
+
+const callContract3 = async (selectedPlan : any) => {
+  try {
+    // Crear una instancia de Web3 usando MetaMask u otro proveedor de Web3
+    if (!window.ethereum) {
+      throw new Error('MetaMask u otro proveedor de Web3 no detectado');
+    }
+    const web3 = new Web3(window.ethereum);
+
+    // Obtener las cuentas del usuario conectado
+    const accounts = await web3.eth.requestAccounts();
+    const walletAddress = accounts[0];
+
+    // Dirección y ABI del contrato
+    const contractAddress = "0x0cda7c31216405d997479f3e0219a5d9f3d9909c";
+
+    // Crear una instancia del contrato
+    const contract = new web3.eth.Contract(abi, contractAddress);
+    console.log(contract)
+    // Llamar a la función 'totalPercentage()' del contrato
+    const balance = await contract.methods.totalPercentage().call();
+    console.log("Saldo:", balance);
+  } catch (error) {
+    console.error("Error al llamar al contrato:", error);
+  }
+};
+
   return (
+    <ThirdwebProvider
+    activeChain={BinanceTestnet}
+    clientId="your-client-id"
+  >
     <div className="container-Membership">
       <div className="header">
         <div className="header-logo">
@@ -111,10 +183,42 @@ const SelectMembership = ({ dataPlans }: Props) => {
         </ModalComponent>
       </div>
 
-      <div className="px-[24px] mb-6">
+      <div onClick={() => callContract3(selectedPlan)} className="px-[24px] mb-6">
         <ButtonPrimary text={t("Confirm")} />
+        <Web3Button
+      contractAddress="0x0cda7c31216405d997479f3e0219a5d9f3d9909c"
+      contractAbi={abi}
+      action={async (contract) => {
+        contract.call(
+          "buyMembership", 
+          [1,"0x2306a5EFA31694d26a158d3085458F3513AB5a29"]
+        );
+      }}
+    >
+     Comprar la primera
+    </Web3Button>
+
+
+    <Web3Button
+                 contractAddress="0x0cda7c31216405d997479f3e0219a5d9f3d9909c"
+                 contractAbi={abi}
+                  action={async (contract) => {
+                    contract.call(
+                      "buyMembership", 
+                      [1,"0x2306a5EFA31694d26a158d3085458F3513AB5a29"]
+                    );
+                  }}
+                >
+                  Prueba
+              </Web3Button>
+
       </div>
+      
+
+
     </div>
+    </ThirdwebProvider>
+    
   );
 };
 
