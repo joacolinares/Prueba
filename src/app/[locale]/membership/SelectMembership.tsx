@@ -194,15 +194,9 @@ const SelectMembership = ({ dataPlans }: Props) => {
           </ModalComponent>
         </div>
 
-        <div onClick={() => callContract3(selectedPlan)} className="px-[24px] mb-6">
+        {/* <div onClick={() => callContract3(selectedPlan)} className="px-[24px] mb-6">
           <ButtonPrimary text={t("Confirm")} />
-
-
-
-
-        </div>
-
-
+        </div> */}
 
       </div>
 
@@ -233,7 +227,7 @@ const SelectMembership = ({ dataPlans }: Props) => {
           onError={(error) => alert(`Error --> ${error.message}`)}
           className="buyMembershipClass"
         >
-          Prueba
+          {t("Confirm")}
         </Web3Button>
       </div>
 
