@@ -103,7 +103,7 @@ const callContract3 = async (selectedPlan : any) => {
   return (
     <ThirdwebProvider
     activeChain={BinanceTestnet}
-    clientId="your-client-id"
+    clientId="95347962d3e713129610a9c9f4dbce58"
   >
     <div className="container-Membership">
       <div className="header">
@@ -185,10 +185,22 @@ const callContract3 = async (selectedPlan : any) => {
 
       <div onClick={() => callContract3(selectedPlan)} className="px-[24px] mb-6">
         <ButtonPrimary text={t("Confirm")} />
-        <Web3Button
+
+        
+
+
+      </div>
+      
+
+
+    </div>
+
+
+    <Web3Button
       contractAddress="0x0cda7c31216405d997479f3e0219a5d9f3d9909c"
       contractAbi={abi}
       action={async (contract) => {
+        console.log(contract)
         contract.call(
           "buyMembership", 
           [1,"0x2306a5EFA31694d26a158d3085458F3513AB5a29"]
@@ -212,11 +224,6 @@ const callContract3 = async (selectedPlan : any) => {
                   Prueba
               </Web3Button>
 
-      </div>
-      
-
-
-    </div>
     </ThirdwebProvider>
     
   );
