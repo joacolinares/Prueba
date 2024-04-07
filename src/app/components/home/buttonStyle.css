@@ -1,0 +1,10 @@
+.buyMembershipClass {
+    background: linear-gradient(180deg, #AD98FF 0%, #612DFE 100%) !important;
+    padding: 0.875em 1.5em;
+    color: white !important;
+    font-weight: bolder !important;
+    width: 100%!important;
+    font-size: 1em;
+    font-weight: 600;
+    border-radius: 10px;
+}

@@ -78,7 +78,17 @@ const RegisterThree = () => {
 
     // si estan vacios estos campos significa que no hay errores
     if(fieldError.gender === "" && fieldError.dateOfBirth === "") {
-      router.push("/knowOurTerms")
+      const currentUrl = window.location.href;
+      const queryStringIndex = currentUrl.indexOf("?");
+      if (queryStringIndex !== -1) {
+        const queryString = currentUrl.slice(queryStringIndex + 1);
+        const params = new URLSearchParams(queryString);
+        const referralWallet = params.get("refferalWallet");
+        console.log(referralWallet)
+        if (referralWallet) {
+          router.push(`/knowOurTerms?refferalWallet=${referralWallet}`)
+        } 
+      } 
     }
   }
 

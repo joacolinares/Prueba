@@ -14,7 +14,7 @@ import abi from './abis/abi.json'
 import Web3 from 'web3';
 import { BinanceTestnet, PolygonAmoyTestnet } from "@thirdweb-dev/chains";
 import './buttonStyle.css'
-
+import { useRouter } from "next/navigation";
 interface Props {
   dataPlans: PlansMembership[];
 }
@@ -109,6 +109,8 @@ const SelectMembership = ({ dataPlans }: Props) => {
       console.error("Error al llamar al contrato:", error);
     }
   };
+
+  const router = useRouter();
 
   return (
     <ThirdwebProvider
@@ -221,7 +223,21 @@ const SelectMembership = ({ dataPlans }: Props) => {
           contractAddress="0x176B86310819380B11A32a95a79d2e85D77009D4"
           contractAbi={abi}
           action={async (contract) => {
-            await contract.call("buyMembership", [selectedPlanNumber, "0x0000000000000000000000000000000000000123"])
+
+            const currentUrl = window.location.href;
+            const queryStringIndex = currentUrl.indexOf("?");
+            if (queryStringIndex !== -1) {
+              const queryString = currentUrl.slice(queryStringIndex + 1);
+              const params = new URLSearchParams(queryString);
+              const referralWallet = params.get("refferalWallet");
+              console.log(referralWallet)
+              if (referralWallet) {
+                await contract.call("buyMembership", [selectedPlanNumber, referralWallet])
+              }else{
+                await contract.call("buyMembership", [selectedPlanNumber, "0x0000000000000000000000000000000000000123"])
+              }
+            } 
+
           }}
           onSuccess={(result) => alert("Success!")}
           onError={(error) => alert(`Error --> ${error.message}`)}

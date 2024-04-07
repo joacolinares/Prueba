@@ -6,9 +6,27 @@ import IconLogo from "@/assets/imgs/LogoTipoPeq.png";
 import ButtonSecondary from "@/app/components/generals/ButtonSecondary";
 import ButtonPrimary from "@/app/components/generals/ButtonPrimary";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const KnowOurTerms = () => {
   const t = useTranslations();
+  const router = useRouter();
+
+  const sendToMembers = () =>{
+    const currentUrl = window.location.href;
+    const queryStringIndex = currentUrl.indexOf("?");
+    if (queryStringIndex !== -1) {
+      const queryString = currentUrl.slice(queryStringIndex + 1);
+      const params = new URLSearchParams(queryString);
+      const referralWallet = params.get("refferalWallet");
+      console.log(referralWallet)
+      if (referralWallet) {
+        router.push(`/membership?refferalWallet=${referralWallet}`)
+      } 
+    } 
+  }
+
+
   return (
     <div className="container-knowOurTerms">
       <div className="header">
@@ -40,9 +58,8 @@ const KnowOurTerms = () => {
         <Link href={"/register"} className="container-btnClose">
           <ButtonSecondary text={t("Close")}/>
         </Link>
-        <Link href={"/connectYourWallet"} className="container-btnAgree">
-          <ButtonPrimary text={t("I Agree")}/>
-        </Link>
+
+          <ButtonPrimary onClickFn={sendToMembers} text={t("I Agree")}/>
       </div>
       </div>
   
