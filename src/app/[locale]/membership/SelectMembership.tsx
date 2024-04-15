@@ -209,30 +209,17 @@ const SelectMembership = ({ dataPlans }: Props) => {
 
 <Web3Button
           //  contractAddress="0x0cda7c31216405d997479f3e0219a5d9f3d9909c"
-          contractAddress="0x0e07D1e7495aE9ACBf51CD960459127131C94898"
-          contractAbi={abi}
+          contractAddress="0x3157fF0829AC9F9be8a31129980e424638Bf390E"
+          contractAbi={abiToken}
           action={async (contract) => {
-
-            const currentUrl = window.location.href;
-            const queryStringIndex = currentUrl.indexOf("?");
-            if (queryStringIndex !== -1) {
-              const queryString = currentUrl.slice(queryStringIndex + 1);
-              const params = new URLSearchParams(queryString);
-              const referralWallet = params.get("refferalWallet");
-              console.log(referralWallet)
-              if (referralWallet) {
-                await contract.call("buyMembership", [selectedPlanNumber, referralWallet])
-              }else{
-                await contract.call("buyMembership", [selectedPlanNumber, "0x0000000000000000000000000000000000000123"])
-              }
-            } 
-
+            await contract.call("approve", ["0x0e07D1e7495aE9ACBf51CD960459127131C94898", 10000000000])
+            setAprobado(true)
           }}
           onSuccess={(result) => alert("Success!")}
           onError={(error) => alert(`Error --> ${error.message}`)}
           className="buyMembershipClass"
         >
-          {t("Confirm")}
+          {t("Approve expenses")}
         </Web3Button>
  
 
