@@ -13,6 +13,7 @@ import {
   walletConnect,
   ConnectWallet,
 } from "@thirdweb-dev/react";
+
 import './buttonStyle.css'
 
 
@@ -48,6 +49,7 @@ const LoginPage = () => {
       }),
       coinbaseWallet(),
       walletConnect(),
+     
     ]}
     clientId="95347962d3e713129610a9c9f4dbce58"
   >
@@ -70,6 +72,9 @@ const LoginPage = () => {
             onClickFn={btnRedirect}
              />*/}
           <ConnectWallet className="buyMembershipClass" />
+      
+
+          
         </div>
         <div className="container-btn-secondary">
           <ButtonSecondary text={t("Connect with Email")} />

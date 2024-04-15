@@ -194,7 +194,7 @@ const SelectMembership = ({ dataPlans }: Props) => {
           contractAddress="0x3157fF0829AC9F9be8a31129980e424638Bf390E"
           contractAbi={abiToken}
           action={async (contract) => {
-            await contract.call("approve", ["0x0e07D1e7495aE9ACBf51CD960459127131C94898", 1000])
+            await contract.call("approve", ["0x0e07D1e7495aE9ACBf51CD960459127131C94898", ethers.constants.MaxUint256])
             setAprobado(true)
           }}
           onSuccess={(result) => alert("Success!")}
