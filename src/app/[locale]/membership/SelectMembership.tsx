@@ -174,6 +174,7 @@ const SelectMembership = ({ dataPlans }: Props) => {
               const params = new URLSearchParams(queryString);
               const referralWallet = params.get("refferalWallet");
               console.log(referralWallet)
+              console.log(selectedPlan)
               if (referralWallet) {
                 await contract.call("buyMembership", [selectedPlanNumber, referralWallet])
               }else{
