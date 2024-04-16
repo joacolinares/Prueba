@@ -29,15 +29,15 @@ const SelectMembership = ({ dataPlans }: Props) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleSelectPlan = (plan: string): void => {
-    let number = 4; // Por defecto, asignamos 1 para el plan BASIC
+    let number = 1; // Por defecto, asignamos 1 para el plan BASIC
     if (plan) {
       const planSelect = dataPlans.find((p) => p.plan === plan);
       if (planSelect) {
         setSelectedPlan(planSelect);
         if (plan === "Essential") {
-          number = 5;
+          number = 2;
         } else if (plan === "Premium") {
-          number = 7;
+          number = 3;
         }
       }
     } else {
@@ -54,7 +54,7 @@ const SelectMembership = ({ dataPlans }: Props) => {
   return (
     <ThirdwebProvider
       // activeChain={BinanceTestnet}
-      activeChain={BinanceTestnet}
+      activeChain={PolygonAmoyTestnet}
       clientId="95347962d3e713129610a9c9f4dbce58"
     >
       <div className="container-Membership">
@@ -207,21 +207,7 @@ const SelectMembership = ({ dataPlans }: Props) => {
 
  
 
-<Web3Button
-          //  contractAddress="0x0cda7c31216405d997479f3e0219a5d9f3d9909c"
-          contractAddress="0x3157fF0829AC9F9be8a31129980e424638Bf390E"
-          contractAbi={abiToken}
-          action={async (contract) => {
-            await contract.call("approve", ["0x0e07D1e7495aE9ACBf51CD960459127131C94898", 10000000000])
-            setAprobado(true)
-          }}
-          onSuccess={(result) => alert("Success!")}
-          onError={(error) => alert(`Error --> ${error.message}`)}
-          className="buyMembershipClass"
-        >
-          {t("Approve expenses")}
-        </Web3Button>
- 
+
 
   
 
