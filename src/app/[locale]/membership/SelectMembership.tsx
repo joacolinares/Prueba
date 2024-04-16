@@ -29,15 +29,15 @@ const SelectMembership = ({ dataPlans }: Props) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleSelectPlan = (plan: string): void => {
-    let number = 1; // Por defecto, asignamos 1 para el plan BASIC
+    let number = 5; // Por defecto, asignamos 1 para el plan BASIC
     if (plan) {
       const planSelect = dataPlans.find((p) => p.plan === plan);
       if (planSelect) {
         setSelectedPlan(planSelect);
         if (plan === "Essential") {
-          number = 2;
+          number = 6;
         } else if (plan === "Premium") {
-          number = 3;
+          number = 7;
         }
       }
     } else {
