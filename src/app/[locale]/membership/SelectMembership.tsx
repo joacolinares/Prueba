@@ -187,7 +187,7 @@ const SelectMembership = ({ dataPlans }: Props) => {
           onError={(error) => alert(`Error --> ${error.message}`)}
           className="buyMembershipClass"
         >
-          {t("Confirm")}
+          {t("Confirm!")}
         </Web3Button>
           :
           <Web3Button
